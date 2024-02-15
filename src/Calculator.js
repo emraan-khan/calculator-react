@@ -5,38 +5,23 @@ import './App.css';
 
 function Calculator() {
     const [value,setValue]=useState("");
-    const [res,setRes]=useState('');
 
     function handleClick(n){
-
-        if(n == '='){
-            let lastWord=value.charAt(value.length-1);
-            if( lastWord == '+' || lastWord == '-' || lastWord=='*' || lastWord == '/'){
-                alert("Please Enter the Second value !!!")
+           try {
+            if (n === '=') {
+                setValue(eval(value));
+            } else if (n === "C") {
+                setValue('');
+            } else if (n === 'del') {
+                setValue(value.toString().slice(0, -1));
+            } else {
+                setValue(value + n);
             }
-            setRes(eval(value));
-            console.log(value.charAt(value.length-1))
-        }
-        else if(n == "del"){
-         
-            let r=value.substring(0,value.length-1);
-            setValue(r);
-        }
-        else if(n == 'C'){
+        } catch (error) {
+            alert('Error: Invalid expression');
+            // Optionally, you can also clear the input if an error occurs
             setValue('');
-            setRes('')
         }
-        else{
-            if(res){
-                console.log("inside res");
-                // setValue('');
-                setValue(res+n);
-                setRes('');
-            }
-            else
-            setValue(value+n);
-        }
-
     }
 
 
@@ -44,7 +29,7 @@ function Calculator() {
   return (
     <div className="calculator">
       {/* <div >{}</div> */}
-      <input className="display" value={res ? res : value} type='text'/>
+      <input className="display" value={value} type='text' placeholder='0/>
       <div className="buttons">
         <button onClick={() => handleClick('C')}>C</button>
         <button onClick={() => handleClick('+/-')}>+/-</button>
