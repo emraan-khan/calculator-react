@@ -7,7 +7,7 @@ function Calculator() {
     const [value,setValue]=useState("");
 
     function handleClick(n){
-           try {
+        try {
             if (n === '=') {
                 setValue(eval(value));
             } else if (n === "C") {
@@ -29,7 +29,7 @@ function Calculator() {
   return (
     <div className="calculator">
       {/* <div >{}</div> */}
-      <input className="display" value={value} type='text' placeholder='0/>
+      <input className="display" value={ value} type='text' placeholder='0'/>
       <div className="buttons">
         <button onClick={() => handleClick('C')}>C</button>
         <button onClick={() => handleClick('+/-')}>+/-</button>
